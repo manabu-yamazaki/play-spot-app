@@ -1,7 +1,9 @@
 import * as React from "react"
 import { TextField } from "@mui/material"
 
-type SignFieldAreaProps = {}
+type SignFieldAreaProps = {
+  isNotTopField?: boolean
+}
 
 export const SignFieldArea: React.FC<SignFieldAreaProps> = (props) => {
   return (
@@ -14,7 +16,7 @@ export const SignFieldArea: React.FC<SignFieldAreaProps> = (props) => {
         label="Email Address"
         name="email"
         autoComplete="email"
-        autoFocus
+        autoFocus={!props.isNotTopField}
       />
       <TextField
         margin="normal"

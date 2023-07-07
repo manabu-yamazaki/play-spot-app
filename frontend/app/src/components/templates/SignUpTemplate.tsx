@@ -2,15 +2,15 @@ import * as React from "react"
 import { Box, Container, CssBaseline } from "@mui/material"
 
 import { Symbol } from "../atoms/Symbol"
-import { SignInLinks } from "../molecules/SignInLinks"
-import { SignInForm } from "../organisms/SignInForm"
+import { SignUpLinks } from "../molecules/SignUpLinks"
+import { SignUpForm } from "../organisms/SignUpForm"
 
-type SignInTemplateProps = {
+type SignUpTemplateProps = {
   title: string
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
 }
 
-export const SignInTemplate: React.FC<SignInTemplateProps> = (props) => {
+export const SignUpTemplate: React.FC<SignUpTemplateProps> = (props) => {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -23,9 +23,9 @@ export const SignInTemplate: React.FC<SignInTemplateProps> = (props) => {
         }}
       >
         <Symbol title={props.title} />
-        <SignInForm handleSubmit={props.handleSubmit}>
-          <SignInLinks />
-        </SignInForm>
+        <SignUpForm handleSubmit={props.handleSubmit}>
+          <SignUpLinks />
+        </SignUpForm>
       </Box>
     </Container>
   )

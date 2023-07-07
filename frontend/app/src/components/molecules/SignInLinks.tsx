@@ -1,9 +1,9 @@
 import * as React from "react"
 import { Grid, Link } from "@mui/material"
 
-type SignInLinkProps = {}
+type SignInLinksProps = {}
 
-export const SignInLink: React.FC<SignInLinkProps> = (props) => {
+export const SignInLinks: React.FC<SignInLinksProps> = (props) => {
   return (
     <Grid container>
       <Grid item xs>
@@ -13,7 +13,7 @@ export const SignInLink: React.FC<SignInLinkProps> = (props) => {
       </Grid>
       <Grid item>
         <Link href="#" variant="body2">
-          {"Don't have an account? Sign Up"}
+          Don't have an account? Sign Up
         </Link>
       </Grid>
     </Grid>

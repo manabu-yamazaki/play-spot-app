@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { Layout } from "./Layout"
 import { Top } from "./components/pages/Top"
 import { SignIn } from "./components/pages/SignIn"
+import { SignUp } from "./components/pages/SignUp"
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
@@ -19,6 +20,7 @@ root.render(
       <Routes>
         <Route path="/" Component={Top}></Route>
         <Route path="/sign-in" Component={SignIn}></Route>
+        <Route path="/sign-up" Component={SignUp}></Route>
       </Routes>
     </Layout>
   </Router>,

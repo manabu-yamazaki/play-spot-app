@@ -23,7 +23,7 @@ function Copyright(props: any) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Play Spot App
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -45,6 +45,10 @@ export const Layout: React.FC<LayoutProps> = (props) => {
       ,
       <Link color="inherit" href="/sign-in">
         sign in
+      </Link>
+      ,
+      <Link color="inherit" href="/sign-up">
+        sign up
       </Link>
       {props.children}
       <Copyright sx={{ mt: 8, mb: 4 }} />
