@@ -1,5 +1,5 @@
+import { Box, Button, Checkbox, FormControlLabel } from "@mui/material"
 import * as React from "react"
-import { Button, Box, Checkbox, FormControlLabel } from "@mui/material"
 
 import { SignFieldArea } from "../molecules/SignFieldArea"
 
@@ -21,6 +21,7 @@ export const SignInForm: React.FC<SignInFormProps> = (props) => {
         control={<Checkbox value="remember" color="primary" />}
         label="Remember me"
       />
+      {/* TODO コンポーネント化した方かいいかな？ */}
       <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
         Sign In
       </Button>

@@ -9,6 +9,7 @@ import { Layout } from "./Layout"
 import { Loading } from "./Loading"
 const SignIn = lazy(() => import("./components/pages/SignIn"))
 const SignUp = lazy(() => import("./components/pages/SignUp"))
+const Spot = lazy(() => import("./components/pages/Spot"))
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
@@ -21,6 +22,7 @@ root.render(
         <Route path="/" Component={Loading}>
           <Route path="/sign-in" Component={SignIn}></Route>
           <Route path="/sign-up" Component={SignUp}></Route>
+          <Route path="/spot" Component={Spot}></Route>
         </Route>
       </Routes>
     </Layout>

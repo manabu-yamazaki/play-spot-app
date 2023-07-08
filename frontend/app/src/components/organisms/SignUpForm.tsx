@@ -1,5 +1,5 @@
+import { Box, Button, Checkbox, FormControlLabel } from "@mui/material"
 import * as React from "react"
-import { Button, Box, Checkbox, FormControlLabel } from "@mui/material"
 
 import { NameFieldArea } from "../molecules/NameFieldArea"
 import { SignFieldArea } from "../molecules/SignFieldArea"
@@ -24,6 +24,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props) => {
         control={<Checkbox value="allowExtraEmails" color="primary" />}
         label="I want to receive inspiration, marketing promotions and updates via email."
       />
+      {/* TODO コンポーネント化した方かいいかな？ */}
       <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
         Sign Up
       </Button>
