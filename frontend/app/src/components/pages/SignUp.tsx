@@ -21,3 +21,5 @@ export const SignUp: React.FC<SignInProps> = (props) => {
     ></SignUpTemplate>
   )
 }
+
+export default SignUp

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { lazy } from "react"
 import ReactDOM from "react-dom/client"
 import "./index.css"
 import reportWebVitals from "./reportWebVitals"
@@ -6,9 +6,9 @@ import reportWebVitals from "./reportWebVitals"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 import { Layout } from "./Layout"
-import { Top } from "./components/pages/Top"
-import { SignIn } from "./components/pages/SignIn"
-import { SignUp } from "./components/pages/SignUp"
+import { Loading } from "./Loading"
+const SignIn = lazy(() => import("./components/pages/SignIn"))
+const SignUp = lazy(() => import("./components/pages/SignUp"))
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
@@ -18,9 +18,10 @@ root.render(
   <Router>
     <Layout>
       <Routes>
-        <Route path="/" Component={Top}></Route>
-        <Route path="/sign-in" Component={SignIn}></Route>
-        <Route path="/sign-up" Component={SignUp}></Route>
+        <Route path="/" Component={Loading}>
+          <Route path="/sign-in" Component={SignIn}></Route>
+          <Route path="/sign-up" Component={SignUp}></Route>
+        </Route>
       </Routes>
     </Layout>
   </Router>,

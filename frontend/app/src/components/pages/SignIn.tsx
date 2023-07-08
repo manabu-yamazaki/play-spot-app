@@ -11,9 +11,7 @@ const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
   })
 }
 
-type SignInProps = {}
-
-export const SignIn: React.FC<SignInProps> = (props) => {
+const SignIn: React.FC = () => {
   return (
     <SignInTemplate
       title="Sign in"
@@ -21,3 +19,5 @@ export const SignIn: React.FC<SignInProps> = (props) => {
     ></SignInTemplate>
   )
 }
+
+export default SignIn
