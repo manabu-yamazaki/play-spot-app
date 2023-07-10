@@ -6,6 +6,9 @@ import { SignFieldArea } from "../molecules/SignFieldArea"
 type SignInFormProps = {
   children: React.ReactNode
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
+  onClick: () => void
+  onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export const SignInForm: React.FC<SignInFormProps> = (props) => {
@@ -16,13 +19,24 @@ export const SignInForm: React.FC<SignInFormProps> = (props) => {
       noValidate
       sx={{ mt: 1 }}
     >
-      <SignFieldArea />
+      <SignFieldArea
+        onChangeEmail={props.onChangeEmail}
+        onChangePassword={props.onChangePassword}
+      />
       <FormControlLabel
         control={<Checkbox value="remember" color="primary" />}
         label="Remember me"
       />
       {/* TODO コンポーネント化した方かいいかな？ */}
-      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+        onClick={() => {
+          props.onClick()
+        }}
+      >
         Sign In
       </Button>
       {props.children}

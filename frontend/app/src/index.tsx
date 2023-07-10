@@ -1,9 +1,9 @@
-import React, { lazy } from "react"
+import { lazy } from "react"
 import ReactDOM from "react-dom/client"
 import "./index.css"
 import reportWebVitals from "./reportWebVitals"
 // import { App } from "./App"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
 
 import { Layout } from "./Layout"
 import { Loading } from "./Loading"

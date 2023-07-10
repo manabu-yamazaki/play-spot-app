@@ -1,5 +1,5 @@
-import * as React from "react"
 import { Box, Container, CssBaseline } from "@mui/material"
+import * as React from "react"
 
 import { Symbol } from "../atoms/Symbol"
 import { SignInLinks } from "../molecules/SignInLinks"
@@ -8,6 +8,9 @@ import { SignInForm } from "../organisms/SignInForm"
 type SignInTemplateProps = {
   title: string
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
+  onClick: () => void
+  onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export const SignInTemplate: React.FC<SignInTemplateProps> = (props) => {
@@ -23,7 +26,14 @@ export const SignInTemplate: React.FC<SignInTemplateProps> = (props) => {
         }}
       >
         <Symbol title={props.title} />
-        <SignInForm handleSubmit={props.handleSubmit}>
+        <SignInForm
+          handleSubmit={props.handleSubmit}
+          onClick={() => {
+            props.onClick()
+          }}
+          onChangeEmail={props.onChangeEmail}
+          onChangePassword={props.onChangePassword}
+        >
           <SignInLinks />
         </SignInForm>
       </Box>

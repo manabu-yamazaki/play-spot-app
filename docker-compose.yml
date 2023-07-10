@@ -28,7 +28,9 @@ services:
       - 3001:3000
     depends_on:
       - db
-  
+    # extra_hosts:
+    #   - localhost:172.21.0.1
+
   front:
     build:
       context: ./frontend/

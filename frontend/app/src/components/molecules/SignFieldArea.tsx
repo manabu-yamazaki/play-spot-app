@@ -1,8 +1,10 @@
-import * as React from "react"
 import { TextField } from "@mui/material"
+import * as React from "react"
 
 type SignFieldAreaProps = {
   isNotTopField?: boolean
+  onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export const SignFieldArea: React.FC<SignFieldAreaProps> = (props) => {
@@ -17,6 +19,7 @@ export const SignFieldArea: React.FC<SignFieldAreaProps> = (props) => {
         name="email"
         autoComplete="email"
         autoFocus={!props.isNotTopField}
+        onChange={props.onChangeEmail}
       />
       <TextField
         margin="normal"
@@ -27,6 +30,7 @@ export const SignFieldArea: React.FC<SignFieldAreaProps> = (props) => {
         type="password"
         id="password"
         autoComplete="current-password"
+        onChange={props.onChangePassword}
       />
     </>
   )
