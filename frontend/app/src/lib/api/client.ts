@@ -10,9 +10,11 @@ const options = {
   ignoreHeaders: true,
 }
 
-export const client = applyCaseMiddleware(
+const client = applyCaseMiddleware(
   axios.create({
     baseURL: "http://localhost:3001/api/v1",
   }),
   options,
 )
+
+export default client
