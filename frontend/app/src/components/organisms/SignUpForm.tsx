@@ -7,6 +7,8 @@ import { SignFieldArea } from "../molecules/SignFieldArea"
 type SignUpFormProps = {
   children: React.ReactNode
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
+  onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export const SignUpForm: React.FC<SignUpFormProps> = (props) => {
@@ -18,7 +20,11 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props) => {
       sx={{ mt: 3 }}
     >
       <NameFieldArea>
-        <SignFieldArea isNotTopField={true} />
+        <SignFieldArea
+          isNotTopField={true}
+          onChangeEmail={props.onChangeEmail}
+          onChangePassword={props.onChangePassword}
+        />
       </NameFieldArea>
       <FormControlLabel
         control={<Checkbox value="allowExtraEmails" color="primary" />}

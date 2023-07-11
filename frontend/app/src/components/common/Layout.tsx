@@ -1,16 +1,15 @@
-import React from "react"
+import CameraIcon from "@mui/icons-material/PhotoCamera"
 import {
   AppBar,
   createTheme,
   CssBaseline,
   Link,
-  // Paper,
   Stack,
   ThemeProvider,
   Toolbar,
   Typography,
 } from "@mui/material"
-import CameraIcon from "@mui/icons-material/PhotoCamera"
+import React from "react"
 
 const defaultTheme = createTheme()
 // const defaultTheme = createTheme({
@@ -56,7 +55,6 @@ export const Layout: React.FC<LayoutProps> = (props) => {
           <Typography variant="h6" color="inherit" noWrap>
             Play Spot App
           </Typography>
-          {/* <h1>Play Spot App</h1> */}
           <Stack direction="row" spacing={2} m={"0 0 0 auto"}>
             <Link color="inherit" href="/sign-in">
               Sign in

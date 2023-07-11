@@ -1,4 +1,4 @@
-import { Box, Container, CssBaseline } from "@mui/material"
+import { Alert, Box, Container, CssBaseline } from "@mui/material"
 import * as React from "react"
 
 import { Symbol } from "../atoms/Symbol"
@@ -11,32 +11,41 @@ type SignInTemplateProps = {
   onClick: () => void
   onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void
   onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void
+  errorMessage: string
 }
 
 export const SignInTemplate: React.FC<SignInTemplateProps> = (props) => {
+  const hasErrorMessage = () => {
+    return props.errorMessage === "" ? "none" : ""
+  }
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Symbol title={props.title} />
-        <SignInForm
-          handleSubmit={props.handleSubmit}
-          onClick={() => {
-            props.onClick()
+    <>
+      <Alert severity="error" sx={{ width: "100%", display: hasErrorMessage }}>
+        {props.errorMessage}
+      </Alert>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
-          onChangeEmail={props.onChangeEmail}
-          onChangePassword={props.onChangePassword}
         >
-          <SignInLinks />
-        </SignInForm>
-      </Box>
-    </Container>
+          <Symbol title={props.title} />
+          <SignInForm
+            handleSubmit={props.handleSubmit}
+            onClick={() => {
+              props.onClick()
+            }}
+            onChangeEmail={props.onChangeEmail}
+            onChangePassword={props.onChangePassword}
+          >
+            <SignInLinks />
+          </SignInForm>
+        </Box>
+      </Container>
+    </>
   )
 }

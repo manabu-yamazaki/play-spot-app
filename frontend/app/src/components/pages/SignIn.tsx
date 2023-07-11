@@ -1,11 +1,10 @@
-import axios from "axios"
+import axios, { AxiosError } from "axios"
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { SignInTemplate } from "../templates/SignInTemplate"
 
 const URL = "http://localhost:3001/api/v1/auth/sign_in"
-// const URL = "https://deb9-111-188-127-119.ngrok-free.app/api/v1/auth/sign_in"
 
 const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
   event.preventDefault()
@@ -20,6 +19,7 @@ const SignIn: React.FC = () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const value = e.target.value
@@ -32,31 +32,19 @@ const SignIn: React.FC = () => {
   }
 
   const fetchData = async () => {
-    // alert(`email:${email}, password:${password}`)
-    // navigate("/sign-up")
-    axios.post(URL, { email: email, password: password }).then((response) => {
-      console.log(response)
-      if (response.status === 200) {
-        navigate("/spot")
-      }
-    })
-    // await axios
-    //   .post(
-    //     URL,
-    //     { email: email, password: password },
-    //     {
-    //       headers: {
-    //         "Content-type": "Application/json",
-    //         Accept: "Application/json",
-    //       },
-    //     },
-    //   )
-    //   .then((response) => {
-    //     console.log(response)
-    //     if (response.status === 200) {
-    //       navigate("/spot")
-    //     }
-    //   })
+    try {
+      await axios
+        .post(URL, { email: email, password: password })
+        .then((response) => {
+          console.log(response)
+          if (response.status === 200) {
+            navigate("/spot")
+          }
+        })
+    } catch (err) {
+      console.log(err)
+      setErrorMessage((err as AxiosError).message)
+    }
   }
 
   return (
@@ -66,6 +54,7 @@ const SignIn: React.FC = () => {
       onClick={fetchData}
       onChangeEmail={onChangeEmail}
       onChangePassword={onChangePassword}
+      errorMessage={errorMessage}
     ></SignInTemplate>
   )
 }

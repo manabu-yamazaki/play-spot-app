@@ -4,9 +4,10 @@ import "./index.css"
 import reportWebVitals from "./reportWebVitals"
 // import { App } from "./App"
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
+import ErrorBoundary from "./components/common/ErrorBoundary"
 
-import { Layout } from "./Layout"
-import { Loading } from "./Loading"
+import { Layout } from "./components/common/Layout"
+import { Loading } from "./components/common/Loading"
 const SignIn = lazy(() => import("./components/pages/SignIn"))
 const SignUp = lazy(() => import("./components/pages/SignUp"))
 const Spot = lazy(() => import("./components/pages/Spot"))
@@ -17,15 +18,17 @@ root.render(
   //   <App />
   // </React.StrictMode>,
   <Router>
-    <Layout>
-      <Routes>
-        <Route path="/" Component={Loading}>
-          <Route path="/sign-in" Component={SignIn}></Route>
-          <Route path="/sign-up" Component={SignUp}></Route>
-          <Route path="/spot" Component={Spot}></Route>
-        </Route>
-      </Routes>
-    </Layout>
+    <ErrorBoundary>
+      <Layout>
+        <Routes>
+          <Route path="/" Component={Loading}>
+            <Route path="/sign-in" Component={SignIn}></Route>
+            <Route path="/sign-up" Component={SignUp}></Route>
+            <Route path="/spot" Component={Spot}></Route>
+          </Route>
+        </Routes>
+      </Layout>
+    </ErrorBoundary>
   </Router>,
 )
 
