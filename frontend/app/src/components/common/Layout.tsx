@@ -131,8 +131,8 @@ export const Layout: React.FC<LayoutProps> = (props) => {
           </Stack>
         </Toolbar>
       </AppBar>
-      {renderAlert("error")}
       {props.children}
+      {renderAlert("error")}
       <Copyright sx={{ mt: 8, mb: 4 }} />
     </ThemeProvider>
   )
