@@ -8,7 +8,6 @@ import { SignInForm } from "../organisms/SignInForm"
 type SignInTemplateProps = {
   title: string
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
-  onClick: () => void
   onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void
   onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
@@ -28,9 +27,6 @@ export const SignInTemplate: React.FC<SignInTemplateProps> = (props) => {
         <Symbol title={props.title} />
         <SignInForm
           handleSubmit={props.handleSubmit}
-          onClick={() => {
-            props.onClick()
-          }}
           onChangeEmail={props.onChangeEmail}
           onChangePassword={props.onChangePassword}
         >

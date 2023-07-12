@@ -12,8 +12,8 @@ import {
 import { LinkButton } from "components/atoms/LinkButton"
 import { AuthContext } from "components/common/CommonProvider"
 import Cookies from "js-cookie"
-import React, { useContext } from "react"
-import { useNavigate } from "react-router-dom"
+import React, { useContext, useEffect } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 
 const defaultTheme = createTheme()
 // const defaultTheme = createTheme({
@@ -48,13 +48,20 @@ type LayoutProps = {
 }
 
 export const Layout: React.FC<LayoutProps> = (props) => {
-  const { loading, isSignedIn, setIsSignedIn, errorMessage, currentUser } =
-    useContext(AuthContext)
+  const {
+    loading,
+    isSignedIn,
+    setIsSignedIn,
+    errorMessage,
+    setErrorMessage,
+    currentUser,
+  } = useContext(AuthContext)
   const navigate = useNavigate()
+  const sampleLocation = useLocation()
 
-  const hasErrorMessage = () => {
-    return errorMessage === "" ? "none" : ""
-  }
+  useEffect(() => {
+    setErrorMessage("")
+  }, [sampleLocation, setErrorMessage])
 
   const handleSignOut = async (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
@@ -65,25 +72,38 @@ export const Layout: React.FC<LayoutProps> = (props) => {
 
       setIsSignedIn(false)
       navigate("/signin")
-      // await signOut().then((res) => {
-      //   if (res.data.success) {
-      //     // サインアウト時には各Cookieを削除
-      //     Cookies.remove("_access_token")
-      //     Cookies.remove("_client")
-      //     Cookies.remove("_uid")
-
-      //     setIsSignedIn(false)
-      //     navigate("/sign-in")
-
-      //     console.log("Succeeded in sign out")
-      //   } else {
-      //     console.log("Failed in sign out")
-      //   }
-      // })
     } catch (err) {
-      // console.log(err)
       console.log("Failed in sign out", err)
     }
+  }
+
+  const renderLinkButtons = () => {
+    return !loading ? (
+      isSignedIn ? (
+        <>
+          <LinkButton link="/">{currentUser?.email}</LinkButton>
+          <LinkButton link="/spot">Spot</LinkButton>
+          <LinkButton onClick={handleSignOut}>Sign out</LinkButton>
+        </>
+      ) : (
+        <>
+          <LinkButton link="/signin">Sign in</LinkButton>
+          <LinkButton link="/signup">Sign up</LinkButton>
+        </>
+      )
+    ) : (
+      <></>
+    )
+  }
+
+  const renderAlert = () => {
+    return errorMessage !== "" ? (
+      <Alert severity="error" sx={{ width: "100%" }}>
+        {errorMessage}
+      </Alert>
+    ) : (
+      <></>
+    )
   }
 
   return (
@@ -96,28 +116,11 @@ export const Layout: React.FC<LayoutProps> = (props) => {
             Play Spot App
           </Typography>
           <Stack direction="row" spacing={2} m={"0 0 0 auto"}>
-            {!loading ? (
-              isSignedIn ? (
-                <>
-                  <LinkButton link="/">{currentUser?.email}</LinkButton>
-                  <LinkButton link="/spot">Spot</LinkButton>
-                  <LinkButton onClick={handleSignOut}>Sign out</LinkButton>
-                </>
-              ) : (
-                <>
-                  <LinkButton link="/signin">Sign in</LinkButton>
-                  <LinkButton link="/signup">Sign up</LinkButton>
-                </>
-              )
-            ) : (
-              <></>
-            )}
+            {renderLinkButtons()}
           </Stack>
         </Toolbar>
       </AppBar>
-      <Alert severity="error" sx={{ width: "100%", display: hasErrorMessage }}>
-        {errorMessage}
-      </Alert>
+      {renderAlert()}
       {props.children}
       <Copyright sx={{ mt: 8, mb: 4 }} />
     </ThemeProvider>
