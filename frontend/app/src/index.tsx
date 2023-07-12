@@ -1,35 +1,27 @@
-import { lazy } from "react"
+import { AppRouter } from "AppRouter"
+import { CommonProvider } from "components/common/CommonProvider"
+import ErrorBoundary from "components/common/ErrorBoundary"
+import { Layout } from "components/common/Layout"
+import "index.css"
 import ReactDOM from "react-dom/client"
-import "./index.css"
-import reportWebVitals from "./reportWebVitals"
+import { BrowserRouter } from "react-router-dom"
+import reportWebVitals from "reportWebVitals"
 // import { App } from "./App"
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
-import ErrorBoundary from "./components/common/ErrorBoundary"
-
-import { Layout } from "./components/common/Layout"
-import { Loading } from "./components/common/Loading"
-const SignIn = lazy(() => import("./components/pages/SignIn"))
-const SignUp = lazy(() => import("./components/pages/SignUp"))
-const Spot = lazy(() => import("./components/pages/Spot"))
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
   // <React.StrictMode>
   //   <App />
   // </React.StrictMode>,
-  <Router>
+  <BrowserRouter>
     <ErrorBoundary>
-      <Layout>
-        <Routes>
-          <Route path="/" Component={Loading}>
-            <Route path="/sign-in" Component={SignIn}></Route>
-            <Route path="/sign-up" Component={SignUp}></Route>
-            <Route path="/spot" Component={Spot}></Route>
-          </Route>
-        </Routes>
-      </Layout>
+      <CommonProvider>
+        <Layout>
+          <AppRouter />
+        </Layout>
+      </CommonProvider>
     </ErrorBoundary>
-  </Router>,
+  </BrowserRouter>,
 )
 
 // If you want to start measuring performance in your app, pass a function
