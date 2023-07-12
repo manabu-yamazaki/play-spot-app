@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { usePersist } from "hooks/usePersist"
 import { User } from "interfaces/index"
 import { getCurrentUser } from "lib/api/auth"
 import React, { createContext, useEffect, useState } from "react"
@@ -21,10 +23,27 @@ type CommonProviderProps = {
 }
 
 export const CommonProvider: React.FC<CommonProviderProps> = (props) => {
+  const [mydata, setMydata] = usePersist("mydata", null)
   const [loading, setLoading] = useState<boolean>(true)
-  const [isSignedIn, setIsSignedIn] = useState<boolean>(false)
-  const [currentUser, setCurrentUser] = useState<User | undefined>()
+  const [isSignedIn, setIsSignedIn] = useState<boolean>(
+    mydata?.isSignedIn || false,
+  )
+  const [currentUser, setCurrentUser] = useState<User | undefined>(
+    mydata?.currentUser || undefined,
+  )
   const [errorMessage, setErrorMessage] = useState<string>("")
+
+  useEffect(() => {
+    handleGetCurrentUser()
+  }, [setCurrentUser])
+
+  useEffect(() => {
+    const data = {
+      isSignedIn,
+      currentUser,
+    }
+    setMydata(data)
+  }, [isSignedIn, currentUser])
 
   // 認証済みのユーザーがいるかどうかチェック
   // 確認できた場合はそのユーザーの情報を取得
@@ -46,10 +65,6 @@ export const CommonProvider: React.FC<CommonProviderProps> = (props) => {
       setLoading(false)
     }
   }
-
-  useEffect(() => {
-    handleGetCurrentUser()
-  }, [setCurrentUser])
 
   return (
     <AuthContext.Provider

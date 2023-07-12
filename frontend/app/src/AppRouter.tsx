@@ -13,8 +13,18 @@ export const AppRouter: React.FC = () => {
   return (
     <Routes>
       <Route path="/" Component={Loading}>
-        <Route path="/signin" Component={SignIn}></Route>
-        <Route path="/signup" Component={SignUp}></Route>
+        <Route
+          path="/signin"
+          element={
+            !isSignedIn ? <SignIn></SignIn> : <Navigate replace to="/spot" />
+          }
+        ></Route>
+        <Route
+          path="/signup"
+          element={
+            !isSignedIn ? <SignUp></SignUp> : <Navigate replace to="/spot" />
+          }
+        ></Route>
         <Route
           path="/spot"
           element={

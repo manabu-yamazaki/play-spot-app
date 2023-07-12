@@ -6,9 +6,13 @@ import { SignFieldArea } from "../molecules/SignFieldArea"
 
 type SignUpFormProps = {
   children: React.ReactNode
+  onChangeLastName: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChangeFirstName: (e: React.ChangeEvent<HTMLInputElement>) => void
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
   onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void
   onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChangePasswordConfirmation: (e: React.ChangeEvent<HTMLInputElement>) => void
+  canSubmit: boolean
 }
 
 export const SignUpForm: React.FC<SignUpFormProps> = (props) => {
@@ -19,7 +23,11 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props) => {
       noValidate
       sx={{ mt: 3 }}
     >
-      <NameFieldArea>
+      <NameFieldArea
+        onChangeLastName={props.onChangeLastName}
+        onChangeFirstName={props.onChangeFirstName}
+        onChangePasswordConfirmation={props.onChangePasswordConfirmation}
+      >
         <SignFieldArea
           isNotTopField={true}
           onChangeEmail={props.onChangeEmail}
@@ -30,8 +38,13 @@ export const SignUpForm: React.FC<SignUpFormProps> = (props) => {
         control={<Checkbox value="allowExtraEmails" color="primary" />}
         label="I want to receive inspiration, marketing promotions and updates via email."
       />
-      {/* TODO コンポーネント化した方かいいかな？ */}
-      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        disabled={!props.canSubmit}
+        sx={{ mt: 3, mb: 2 }}
+      >
         Sign Up
       </Button>
       {props.children}

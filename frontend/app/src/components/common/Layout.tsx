@@ -3,6 +3,7 @@ import {
   Alert,
   AppBar,
   CssBaseline,
+  Snackbar,
   Stack,
   ThemeProvider,
   Toolbar,
@@ -12,8 +13,8 @@ import {
 import { LinkButton } from "components/atoms/LinkButton"
 import { AuthContext } from "components/common/CommonProvider"
 import Cookies from "js-cookie"
-import React, { useContext, useEffect } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import React, { useContext } from "react"
+import { useNavigate } from "react-router-dom"
 
 const defaultTheme = createTheme()
 // const defaultTheme = createTheme({
@@ -57,11 +58,6 @@ export const Layout: React.FC<LayoutProps> = (props) => {
     currentUser,
   } = useContext(AuthContext)
   const navigate = useNavigate()
-  const sampleLocation = useLocation()
-
-  useEffect(() => {
-    setErrorMessage("")
-  }, [sampleLocation, setErrorMessage])
 
   const handleSignOut = async (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
@@ -96,11 +92,26 @@ export const Layout: React.FC<LayoutProps> = (props) => {
     )
   }
 
-  const renderAlert = () => {
+  const renderAlert = (severity: "error" | "success" | "info" | "warning") => {
+    const handleCloseAlertMessage = (
+      e?: React.SyntheticEvent | Event,
+      reason?: string,
+    ) => {
+      if (reason === "clickaway") return
+
+      setErrorMessage("")
+    }
     return errorMessage !== "" ? (
-      <Alert severity="error" sx={{ width: "100%" }}>
-        {errorMessage}
-      </Alert>
+      <Snackbar
+        open={errorMessage !== ""}
+        autoHideDuration={6000}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        onClose={handleCloseAlertMessage}
+      >
+        <Alert onClose={handleCloseAlertMessage} severity={severity}>
+          {errorMessage}
+        </Alert>
+      </Snackbar>
     ) : (
       <></>
     )
@@ -120,7 +131,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
           </Stack>
         </Toolbar>
       </AppBar>
-      {renderAlert()}
+      {renderAlert("error")}
       {props.children}
       <Copyright sx={{ mt: 8, mb: 4 }} />
     </ThemeProvider>

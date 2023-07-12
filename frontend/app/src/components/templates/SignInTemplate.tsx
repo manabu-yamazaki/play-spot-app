@@ -10,6 +10,7 @@ type SignInTemplateProps = {
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
   onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void
   onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void
+  canSubmit: boolean
 }
 
 export const SignInTemplate: React.FC<SignInTemplateProps> = (props) => {
@@ -29,6 +30,7 @@ export const SignInTemplate: React.FC<SignInTemplateProps> = (props) => {
           handleSubmit={props.handleSubmit}
           onChangeEmail={props.onChangeEmail}
           onChangePassword={props.onChangePassword}
+          canSubmit={props.canSubmit}
         >
           <SignInLinks />
         </SignInForm>

@@ -8,6 +8,7 @@ type SignInFormProps = {
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
   onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void
   onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void
+  canSubmit: boolean
 }
 
 export const SignInForm: React.FC<SignInFormProps> = (props) => {
@@ -26,7 +27,13 @@ export const SignInForm: React.FC<SignInFormProps> = (props) => {
         control={<Checkbox value="remember" color="primary" />}
         label="Remember me"
       />
-      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        disabled={!props.canSubmit}
+        sx={{ mt: 3, mb: 2 }}
+      >
         Sign In
       </Button>
       {props.children}

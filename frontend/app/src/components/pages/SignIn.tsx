@@ -1,9 +1,8 @@
-import { AxiosError } from "axios"
 import { AuthContext } from "components/common/CommonProvider"
 import { SignInParams } from "interfaces"
 import Cookies from "js-cookie"
 import { signIn } from "lib/api/auth"
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { SignInTemplate } from "../templates/SignInTemplate"
 
@@ -11,8 +10,13 @@ const SignIn: React.FC = () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
+  const [canSubmit, setCanSubmit] = useState<boolean>(false)
   const { setIsSignedIn, setCurrentUser, setErrorMessage } =
     useContext(AuthContext)
+
+  useEffect(() => {
+    setCanSubmit(email && password ? true : false)
+  }, [email, password])
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>): void =>
     setEmail(e.target.value)
@@ -22,30 +26,32 @@ const SignIn: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    const params: SignInParams = {
+      email: email,
+      password: password,
+    }
     try {
-      await signIn({ email: email, password: password } as SignInParams).then(
-        (res) => {
-          console.log(res)
-          if (res.status === 200) {
-            // ログインに成功した場合はCookieに各値を格納
-            Cookies.set("_access_token", res.headers["access-token"])
-            Cookies.set("_client", res.headers["client"])
-            Cookies.set("_uid", res.headers["uid"])
+      await signIn(params).then((res) => {
+        console.log(res)
+        if (res.status === 200) {
+          // ログインに成功した場合はCookieに各値を格納
+          Cookies.set("_access_token", res.headers["access-token"])
+          Cookies.set("_client", res.headers["client"])
+          Cookies.set("_uid", res.headers["uid"])
 
-            setIsSignedIn(true)
-            setCurrentUser(res.data.data)
+          setIsSignedIn(true)
+          setCurrentUser(res.data.data)
 
-            navigate("/spot")
+          navigate("/spot")
 
-            console.log("Signed in successfully!")
-          } else {
-            setErrorMessage("Error")
-          }
-        },
-      )
+          console.log("Signed in successfully!")
+        } else {
+          setErrorMessage("認証エラー")
+        }
+      })
     } catch (err) {
       console.log(err)
-      setErrorMessage((err as AxiosError).message)
+      setErrorMessage("認証エラー")
     }
   }
 
@@ -55,6 +61,7 @@ const SignIn: React.FC = () => {
       handleSubmit={handleSubmit}
       onChangeEmail={onChangeEmail}
       onChangePassword={onChangePassword}
+      canSubmit={canSubmit}
     ></SignInTemplate>
   )
 }
