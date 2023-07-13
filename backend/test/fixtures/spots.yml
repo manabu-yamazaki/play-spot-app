@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString99
+  url: MyString
+  summary: MyText
+  prefecture_code: 1
+  min_budget: 1
+  max_budget: 1
+
+two:
+  name: MyString1
+  url: MyString
+  summary: MyText
+  prefecture_code: 1
+  min_budget: 1
+  max_budget: 1
