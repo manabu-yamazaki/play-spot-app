@@ -8,8 +8,13 @@ class Api::V1::SpotsController < ApplicationController
   end
 
   def create
+    spot = Spot.create(params.require(:spot).permit(:name, :url, :summary, :prefecture_code, :min_budget, :max_budget))
+    render json: { spot: spot }
   end
 
   def update
+    spot = Spot.find(params[:id])
+    spot.update(params.require(:spot).permit(:name, :url, :summary, :prefecture_code, :min_budget, :max_budget))
+    render json: { spot: spot }
   end
 end
