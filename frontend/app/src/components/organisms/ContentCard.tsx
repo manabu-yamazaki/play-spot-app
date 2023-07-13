@@ -11,7 +11,7 @@ import * as React from "react"
 
 type ContentCardProps = {
   title: string
-  context: string
+  comment: string
 }
 
 export const ContentCard: React.FC<ContentCardProps> = (props) => {
@@ -35,7 +35,7 @@ export const ContentCard: React.FC<ContentCardProps> = (props) => {
         <Typography gutterBottom variant="h5" component="h2">
           {props.title}
         </Typography>
-        <Typography>{props.context}</Typography>
+        <Typography>{props.comment}</Typography>
       </CardContent>
       {/* TODO コンポーネント化した方かいいかな？ */}
       <CardActions>

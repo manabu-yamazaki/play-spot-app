@@ -30,8 +30,9 @@ const SignIn: React.FC = () => {
       email: email,
       password: password,
     }
-    try {
-      await signIn(params).then((res) => {
+
+    await signIn(params)
+      .then((res) => {
         console.log(res)
         if (res.status === 200) {
           // ログインに成功した場合はCookieに各値を格納
@@ -49,10 +50,10 @@ const SignIn: React.FC = () => {
           setErrorMessage("認証エラー")
         }
       })
-    } catch (err) {
-      console.log(err)
-      setErrorMessage("認証エラー")
-    }
+      .catch((err) => {
+        console.log(err)
+        setErrorMessage("認証エラー")
+      })
   }
 
   return (

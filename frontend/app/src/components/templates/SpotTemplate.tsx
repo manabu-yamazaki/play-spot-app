@@ -1,20 +1,24 @@
 import { Container } from "@mui/material"
+import { PageTitle } from "components/molecules/PageTitle"
+import { ContentsViewer } from "components/organisms/ContentsViewer"
+import { Content, SpotParams } from "interfaces/index"
 import * as React from "react"
-
-import { PageTitle } from "../molecules/PageTitle"
-import { ContentsViewer } from "../organisms/ContentsViewer"
 
 type SpotTemplateProps = {
   title: string
-  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
+  spots: SpotParams[]
 }
 
 export const SpotTemplate: React.FC<SpotTemplateProps> = (props) => {
   return (
     <main>
-      <PageTitle title="Play Spot" context="説明文書こうかな〜" />
+      <PageTitle title={props.title} context="説明文書こうかな〜" />
       <Container sx={{ py: 8 }} maxWidth="md">
-        <ContentsViewer />
+        <ContentsViewer
+          contents={props.spots.map((spot) => {
+            return { title: spot.name, comment: spot.summary } as Content
+          })}
+        />
       </Container>
       {/* Footer */}
       {/* <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
