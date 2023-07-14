@@ -7,9 +7,11 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material"
+import { LinkButton } from "components/atoms/LinkButton"
 import * as React from "react"
 
 type ContentCardProps = {
+  id: string
   title: string
   comment: string
 }
@@ -41,6 +43,7 @@ export const ContentCard: React.FC<ContentCardProps> = (props) => {
       <CardActions>
         <FavoriteIcon />
         <FavoriteBorderIcon />
+        <LinkButton link={`/spots/${props.id}`}>edit</LinkButton>
       </CardActions>
     </Card>
   )

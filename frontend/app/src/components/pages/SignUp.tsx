@@ -60,7 +60,7 @@ export const SignUp: React.FC = () => {
           Cookies.set("_uid", res.headers["uid"])
           setIsSignedIn(true)
           setCurrentUser(res.data.data)
-          navigate("/spot")
+          navigate("/spots")
           console.log("Signed in successfully!")
         } else {
           setErrorMessage("認証エラー")

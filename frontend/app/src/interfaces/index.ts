@@ -27,16 +27,19 @@ export interface User {
 
 // スポット
 export interface SpotParams {
-  id: number
+  id: string
   name: string
   url?: string
   summary?: string
-  prefecture_code: number
-  created_at: Date
-  updated_at: Date
+  prefecture_code: string
+  min_budget: string
+  max_budget: string
+  created_at?: Date
+  updated_at?: Date
 }
 
 export interface Content {
+  id: string
   title: string
   comment: string
 }

@@ -43,7 +43,7 @@ const SignIn: React.FC = () => {
           setIsSignedIn(true)
           setCurrentUser(res.data.data)
 
-          navigate("/spot")
+          navigate("/spots")
 
           console.log("Signed in successfully!")
         } else {

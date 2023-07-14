@@ -4,19 +4,23 @@ import { ContentsViewer } from "components/organisms/ContentsViewer"
 import { Content, SpotParams } from "interfaces/index"
 import * as React from "react"
 
-type SpotTemplateProps = {
+type SpotsTemplateProps = {
   title: string
   spots: SpotParams[]
 }
 
-export const SpotTemplate: React.FC<SpotTemplateProps> = (props) => {
+export const SpotsTemplate: React.FC<SpotsTemplateProps> = (props) => {
   return (
     <main>
       <PageTitle title={props.title} context="説明文書こうかな〜" />
       <Container sx={{ py: 8 }} maxWidth="md">
         <ContentsViewer
           contents={props.spots.map((spot) => {
-            return { title: spot.name, comment: spot.summary } as Content
+            return {
+              id: spot.id,
+              title: spot.name,
+              comment: spot.summary,
+            } as Content
           })}
         />
       </Container>

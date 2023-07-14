@@ -1,10 +1,10 @@
 import { AuthContext } from "components/common/CommonProvider"
-import { SpotTemplate } from "components/templates/SpotTemplate"
+import { SpotsTemplate } from "components/templates/SpotsTemplate"
 import { SpotParams } from "interfaces/index"
 import { getSpots } from "lib/api/spots"
 import React, { useContext, useEffect, useState } from "react"
 
-const Spot: React.FC = () => {
+const Spots: React.FC = () => {
   const [spots, setSpots] = useState<SpotParams[]>([])
   const { setErrorMessage } = useContext(AuthContext)
 
@@ -31,7 +31,7 @@ const Spot: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return <SpotTemplate title="Play Spot" spots={spots}></SpotTemplate>
+  return <SpotsTemplate title="Play Spot" spots={spots}></SpotsTemplate>
 }
 
-export default Spot
+export default Spots

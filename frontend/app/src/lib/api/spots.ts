@@ -1,11 +1,17 @@
+import { SpotParams } from "interfaces"
 import client from "lib/api/client"
 
-// 認証済みのユーザーを取得
+// 全スポットを取得
 export const getSpots = () => {
   return client.get("spots")
 }
 
-// 認証済みのユーザーを取得
-export const getSpot = (id: number) => {
+// 指定のスポットを取得
+export const getSpot = (id: string) => {
   return client.get(`spots/${id}`)
+}
+
+// 指定のスポットを取得
+export const patchSpot = (params: SpotParams) => {
+  return client.patch(`spots/${params.id}`, params)
 }

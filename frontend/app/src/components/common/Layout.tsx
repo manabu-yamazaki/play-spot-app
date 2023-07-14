@@ -78,7 +78,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
       isSignedIn ? (
         <>
           <LinkButton link="/">{currentUser?.email}</LinkButton>
-          <LinkButton link="/spot">Play Spot</LinkButton>
+          <LinkButton link="/spots">Play Spot</LinkButton>
           <LinkButton onClick={handleSignOut}>Sign out</LinkButton>
         </>
       ) : (
