@@ -13,13 +13,15 @@ const Spots: React.FC = () => {
       await getSpots()
         .then((res) => {
           console.log(res)
-          if (res.status === 200) {
-            setSpots(res.data.spots)
-          } else {
+
+          if (res.status !== 200) {
             setErrorMessage(
               "データを取得できませんでした。時間をおいてリロードしてください。",
             )
+            return
           }
+
+          setSpots(res.data.spots)
         })
         .catch((err) => {
           console.log(err)

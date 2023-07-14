@@ -24,18 +24,20 @@ const SpotEdit: React.FC = () => {
       await getSpot(id)
         .then((res) => {
           console.log(res)
-          if (res.status === 200) {
-            setName(res.data.spot.name)
-            setUrl(res.data.spot.url)
-            setSummary(res.data.spot.summary)
-            setPrefectureCode(res.data.spot.prefectureCode)
-            setMinBudget(res.data.spot.minBudget)
-            setMaxBudget(res.data.spot.maxBudget)
-          } else {
+
+          if (res.status !== 200) {
             setErrorMessage(
               "データを取得できませんでした。時間をおいてリロードしてください。",
             )
+            return
           }
+
+          setName(res.data.spot.name)
+          setUrl(res.data.spot.url)
+          setSummary(res.data.spot.summary)
+          setPrefectureCode(res.data.spot.prefectureCode)
+          setMinBudget(res.data.spot.minBudget)
+          setMaxBudget(res.data.spot.maxBudget)
         })
         .catch((err) => {
           console.log(err)

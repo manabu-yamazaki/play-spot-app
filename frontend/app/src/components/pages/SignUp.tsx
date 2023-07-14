@@ -52,19 +52,21 @@ export const SignUp: React.FC = () => {
     try {
       await signUp(params).then((res) => {
         console.log(res)
-        if (res.status === 200) {
-          // アカウント作成と同時にログインさせてしまう
-          // 本来であればメール確認などを挟むべきだが、今回はサンプルなので
-          Cookies.set("_access_token", res.headers["access-token"])
-          Cookies.set("_client", res.headers["client"])
-          Cookies.set("_uid", res.headers["uid"])
-          setIsSignedIn(true)
-          setCurrentUser(res.data.data)
-          navigate("/spots")
-          console.log("Signed in successfully!")
-        } else {
+
+        if (res.status !== 200) {
           setErrorMessage("認証エラー")
+          return
         }
+
+        // アカウント作成と同時にログインさせてしまう
+        // 本来であればメール確認などを挟むべきだが、今回はサンプルなので
+        Cookies.set("_access_token", res.headers["access-token"])
+        Cookies.set("_client", res.headers["client"])
+        Cookies.set("_uid", res.headers["uid"])
+        setIsSignedIn(true)
+        setCurrentUser(res.data.data)
+        navigate("/spots")
+        console.log("Signed in successfully!")
       })
     } catch (err) {
       console.log(err)
