@@ -49,32 +49,31 @@ const SpotEdit: React.FC = () => {
 
   const handleNext = async () => {
     setActiveStep(activeStep + 1)
-    if (activeStep === steps.length - 1) {
-      const params: SpotParams = {
-        id: id,
-        name: name,
-        url: url,
-        summary: summary,
-        prefecture_code: prefectureCode,
-        min_budget: minBudget,
-        max_budget: maxBudget,
-      }
+    if (activeStep !== steps.length - 1) return
 
-      const handleApi = id ? patchSpot : postSpot
-      await handleApi(params)
-        .then((res) => {
-          console.log(res)
-          if (res.status === 200) {
-            navigate("/spots")
-          } else {
-            setErrorMessage("更新に失敗しました。最初からやり直してください。")
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-          setErrorMessage("更新に失敗しました。最初からやり直してください。")
-        })
+    const params: SpotParams = {
+      id: id,
+      name: name,
+      url: url,
+      summary: summary,
+      prefecture_code: prefectureCode,
+      min_budget: minBudget,
+      max_budget: maxBudget,
     }
+    const handleApi = id ? patchSpot : postSpot
+    await handleApi(params)
+      .then((res) => {
+        console.log(res)
+        if (res.status === 200) {
+          navigate("/spots")
+        } else {
+          setErrorMessage("更新に失敗しました。最初からやり直してください。")
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+        setErrorMessage("更新に失敗しました。最初からやり直してください。")
+      })
   }
 
   const handleBack = () => {
