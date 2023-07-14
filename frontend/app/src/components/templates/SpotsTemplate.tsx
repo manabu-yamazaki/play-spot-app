@@ -1,4 +1,6 @@
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline"
 import { Container } from "@mui/material"
+import { LinkButton } from "components/atoms/LinkButton"
 import { PageTitle } from "components/molecules/PageTitle"
 import { ContentsViewer } from "components/organisms/ContentsViewer"
 import { Content, SpotParams } from "interfaces/index"
@@ -14,6 +16,9 @@ export const SpotsTemplate: React.FC<SpotsTemplateProps> = (props) => {
     <main>
       <PageTitle title={props.title} context="説明文書こうかな〜" />
       <Container sx={{ py: 8 }} maxWidth="md">
+        <LinkButton link="/spots/new">
+          <AddCircleOutlineIcon></AddCircleOutlineIcon>
+        </LinkButton>
         <ContentsViewer
           contents={props.spots.map((spot) => {
             return {

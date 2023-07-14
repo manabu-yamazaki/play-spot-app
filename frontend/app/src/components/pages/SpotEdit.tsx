@@ -2,7 +2,7 @@ import { AuthContext } from "components/common/CommonProvider"
 import { SpotsEditTemplate } from "components/templates/SpotEditTemplate"
 import { steps } from "constants/index"
 import { SpotParams } from "interfaces"
-import { getSpot, patchSpot } from "lib/api/spots"
+import { getSpot, patchSpot, postSpot } from "lib/api/spots"
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
@@ -51,7 +51,7 @@ const SpotEdit: React.FC = () => {
     setActiveStep(activeStep + 1)
     if (activeStep === steps.length - 1) {
       const params: SpotParams = {
-        id: id || "",
+        id: id,
         name: name,
         url: url,
         summary: summary,
@@ -59,8 +59,9 @@ const SpotEdit: React.FC = () => {
         min_budget: minBudget,
         max_budget: maxBudget,
       }
-      console.log("params", params)
-      await patchSpot(params)
+
+      const handleApi = id ? patchSpot : postSpot
+      await handleApi(params)
         .then((res) => {
           console.log(res)
           if (res.status === 200) {

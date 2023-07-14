@@ -27,7 +27,7 @@ export interface User {
 
 // スポット
 export interface SpotParams {
-  id: string
+  id?: string
   name: string
   url?: string
   summary?: string

@@ -1,3 +1,4 @@
+import EditIcon from "@mui/icons-material/Edit"
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
 import {
@@ -43,7 +44,9 @@ export const ContentCard: React.FC<ContentCardProps> = (props) => {
       <CardActions>
         <FavoriteIcon />
         <FavoriteBorderIcon />
-        <LinkButton link={`/spots/${props.id}`}>edit</LinkButton>
+        <LinkButton link={`/spots/${props.id}`}>
+          <EditIcon></EditIcon>
+        </LinkButton>
       </CardActions>
     </Card>
   )
