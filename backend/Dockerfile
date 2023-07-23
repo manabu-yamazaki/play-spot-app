@@ -1,5 +1,8 @@
 FROM ruby:3.0
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+  # =========ローカルと本番切り替え===========
+# RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs mysql-server mysql-client
+  # ======================================
 
 ENV APP_PATH /myapp
 
@@ -8,7 +11,14 @@ WORKDIR $APP_PATH
 
 COPY Gemfile $APP_PATH/Gemfile
 COPY Gemfile.lock $APP_PATH/Gemfile.lock
+  # =========ローカルと本番切り替え===========
+RUN gem install bundler
+  # ======================================
 RUN bundle install
+
+  # =========ローカルと本番切り替え===========
+RUN mkdir -p tmp/sockets
+  # ======================================
 
 COPY . $APP_PATH
 
