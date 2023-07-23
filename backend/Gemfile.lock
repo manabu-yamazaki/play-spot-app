@@ -96,6 +96,7 @@ GEM
     irb (1.7.1)
       reline (>= 0.3.0)
     json (2.6.3)
+    kgio (2.11.4)
     language_server-protocol (3.17.0.3)
     loofah (2.21.3)
       crass (~> 1.0.2)
@@ -167,6 +168,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
+    raindrops (0.20.1)
     rake (13.0.6)
     regexp_parser (2.8.1)
     reline (0.3.5)
@@ -201,6 +203,9 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
+    unicorn (6.1.0)
+      kgio (~> 2.6)
+      raindrops (~> 0.7)
     warden (1.2.9)
       rack (>= 2.0.9)
     websocket-driver (0.7.5)
@@ -225,6 +230,7 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   tzinfo-data
+  unicorn
 
 RUBY VERSION
    ruby 3.0.6p216
