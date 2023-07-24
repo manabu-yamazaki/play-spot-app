@@ -26,8 +26,12 @@ services:
     # ======================================
     image: rails:dev
     volumes:
-      - ./backend:/myapp
-      - ./backend/vendor/bundle:/myapp/vendor/bundle
+      # - ./backend:/myapp
+      # - ./backend/vendor/bundle:/myapp/vendor/bundle
+      - .:/myapp
+      - public-data:/backend/myapp/public
+      - tmp-data:/backend/myapp/tmp
+      - log-data:/backend/myapp/log
     environment:
       TZ: Asia/Tokyo
       RAILS_ENV: development
@@ -54,6 +58,10 @@ services:
 
 volumes:
   mysql-data:
+  public-data:
+  tmp-data:
+  log-data:
+  db-data:
 
 networks:
   activityspot-network:
