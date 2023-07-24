@@ -16,11 +16,11 @@ RUN gem install bundler
   # ======================================
 RUN bundle install
 
-  # =========ローカルと本番切り替え===========
-RUN mkdir -p tmp/sockets
-  # ======================================
+COPY . $APP_PATH
 
-# COPY . $APP_PATH
+  # =========ローカルと本番切り替え===========
+RUN mkdir -p backend/tmp/sockets
+  # ======================================
 
 # # Add a script to be executed every time the container starts.
 # COPY entrypoint.sh /usr/bin/
