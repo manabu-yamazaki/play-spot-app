@@ -12,7 +12,7 @@ WORKDIR $APP_PATH
 COPY Gemfile $APP_PATH/Gemfile
 COPY Gemfile.lock $APP_PATH/Gemfile.lock
   # =========ローカルと本番切り替え===========
-RUN gem install bundler
+# RUN gem install bundler
   # ======================================
 RUN bundle install
 
