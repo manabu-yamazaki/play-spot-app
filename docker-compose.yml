@@ -22,7 +22,7 @@ services:
       dockerfile: Dockerfile
     # =========ローカルと本番切り替え===========
     # command: bundle exec rails s -p 3000 -b '0.0.0.0'
-    command: sudo mkdir -p ./tmp/sockets && bundle exec puma -C config/puma.rb -e production
+    command: mkdir -p /tmp/sockets && bundle exec puma -C config/puma.rb -e production
     # ======================================
     image: rails:dev
     volumes:
