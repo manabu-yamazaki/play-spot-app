@@ -9,8 +9,8 @@ ENV APP_PATH /play-spot-app
 RUN mkdir $APP_PATH
 WORKDIR $APP_PATH
 
-COPY Gemfile $APP_PATH/backend/Gemfile
-COPY Gemfile.lock $APP_PATH/backend/Gemfile.lock
+COPY Gemfile $APP_PATH/Gemfile
+COPY Gemfile.lock $APP_PATH/Gemfile.lock
   # =========ローカルと本番切り替え===========
 RUN gem install bundler
   # ======================================
