@@ -1,7 +1,7 @@
 FROM ruby:3.0
   # =========ローカルと本番切り替え===========
 # RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs mysql-community-server default-mysql-client
+RUN apt-get update -qq && rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022 && apt-get install -y build-essential libpq-dev nodejs mysql-community-server default-mysql-client
   # ======================================
 
 ENV APP_PATH /myapp
