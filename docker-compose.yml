@@ -2,18 +2,18 @@ version: "3"
 
 services:
   # =========ローカルと本番切り替え===========
-  # db:
-  #   image: mysql:8.0
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: password
-  #   command: --default-authentication-plugin=mysql_native_password
-  #   volumes:
-  #     - mysql-data:/var/lib/mysql
-  #     - /tmp/dockerdir:/etc/mysql/conf.d/
-  #   ports:
-  #     - 3306:3306
-  #   networks:
-  #     - activityspot-network
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - /tmp/dockerdir:/etc/mysql/conf.d/
+    ports:
+      - 3306:3306
+    networks:
+      - activityspot-network
   # ======================================
 
   api:
@@ -21,8 +21,8 @@ services:
       context: ./backend/
       dockerfile: Dockerfile
     # =========ローカルと本番切り替え===========
-    # command: bundle exec rails s -p 3000 -b '0.0.0.0'
-    command: bundle exec puma -C config/puma.rb -e production
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    # command: bundle exec puma -C config/puma.rb -e production
     # ======================================
     image: rails:dev
     volumes:
@@ -35,9 +35,9 @@ services:
       - 3001:3000
     networks:
       - activityspot-network
-  # =========ローカルと本番切り替え===========
-  # depends_on:
-  #   - db
+    # =========ローカルと本番切り替え===========
+    depends_on:
+      - db
   # ======================================
 
   front:
