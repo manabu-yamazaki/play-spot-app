@@ -17,7 +17,7 @@ RUN gem install bundler
 RUN bundle install
 
   # =========ローカルと本番切り替え===========
-RUN mkdir -p tmp/sockets
+RUN mkdir -p /tmp/sockets
   # ======================================
 
 # COPY . $APP_PATH
