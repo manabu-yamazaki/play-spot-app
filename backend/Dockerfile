@@ -4,7 +4,7 @@ FROM ruby:3.0
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs default-mysql-client
   # ======================================
 
-ENV APP_PATH /myapp
+ENV APP_PATH /play-spot-app
 
 RUN mkdir $APP_PATH
 WORKDIR $APP_PATH
@@ -17,7 +17,7 @@ RUN gem install bundler
 RUN bundle install
 
   # =========ローカルと本番切り替え===========
-RUN mkdir -p /tmp/sockets
+RUN mkdir -p tmp/sockets
   # ======================================
 
 # COPY . $APP_PATH
