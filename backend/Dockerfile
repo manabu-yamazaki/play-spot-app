@@ -9,15 +9,15 @@ ENV APP_PATH /play-spot-app
 RUN mkdir $APP_PATH
 WORKDIR $APP_PATH
 
-COPY Gemfile $APP_PATH/Gemfile
-COPY Gemfile.lock $APP_PATH/Gemfile.lock
+COPY Gemfile $APP_PATH/backend/Gemfile
+COPY Gemfile.lock $APP_PATH/backend/Gemfile.lock
   # =========ローカルと本番切り替え===========
 RUN gem install bundler
   # ======================================
 RUN bundle install
 
   # =========ローカルと本番切り替え===========
-RUN mkdir -p /tmp/sockets
+RUN mkdir -p tmp/sockets
   # ======================================
 
 # COPY . $APP_PATH
