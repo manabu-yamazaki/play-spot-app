@@ -22,16 +22,16 @@ services:
       dockerfile: Dockerfile
     # =========ローカルと本番切り替え===========
     # command: bundle exec rails s -p 3000 -b '0.0.0.0'
-    command: bundle exec puma -C backend/config/puma.rb -e production
+    command: bundle exec puma -C config/puma.rb -e production
     # ======================================
     image: rails:dev
     volumes:
       # - ./backend:/myapp
       # - ./backend/vendor/bundle:/myapp/vendor/bundle
-      - .:/play_spot_app
-      - public-data:/play_spot_app/backend/public
-      - tmp-data:/play_spot_app/backend/tmp
-      - log-data:/play_spot_app/backend/log
+      - .:/play-spot-app
+      - public-data:/play-spot-app/backend/public
+      - tmp-data:/play-spot-app/backend/tmp
+      - log-data:/play-spot-app/backend/log
     environment:
       TZ: Asia/Tokyo
       RAILS_ENV: development
@@ -50,8 +50,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       # - ./frontend:/usr/src/app
-      - public-data:/play_spot_app/backend/public
-      - tmp-data:/play_spot_app/backend/tmp
+      - public-data:/play-spot-app/backend/public
+      - tmp-data:/play-spot-app/backend/tmp
     command: sh -c "cd app && yarn && yarn start"
     ports:
       - "4000:3000"
