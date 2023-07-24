@@ -1,8 +1,43 @@
-FROM ruby:3.0
-  # =========ローカルと本番切り替え===========
+# FROM ruby:3.0
+#   # =========ローカルと本番切り替え===========
 # RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs default-mysql-client
-  # ======================================
+# # RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs default-mysql-client
+#   # ======================================
+
+# ENV APP_PATH /myapp
+
+# RUN mkdir $APP_PATH
+# WORKDIR $APP_PATH
+
+# COPY Gemfile $APP_PATH/Gemfile
+# COPY Gemfile.lock $APP_PATH/Gemfile.lock
+#   # =========ローカルと本番切り替え===========
+# # RUN gem install bundler
+#   # ======================================
+# RUN bundle install
+
+#   # =========ローカルと本番切り替え===========
+# # RUN mkdir -p tmp/sockets
+#   # ======================================
+
+# COPY . $APP_PATH
+
+# # Add a script to be executed every time the container starts.
+# COPY entrypoint.sh /usr/bin/
+# RUN chmod +x /usr/bin/entrypoint.sh
+# ENTRYPOINT ["entrypoint.sh"]
+# EXPOSE 3000
+
+# # Start the main process.
+# CMD ["rails", "server", "-b", "0.0.0.0"]
+
+FROM ruby:3.0
+
+RUN apt-get update -qq && \
+  apt-get install -y build-essential \
+  nodejs\
+  # mysql-server\
+  default-mysql-client
 
 ENV APP_PATH /myapp
 
@@ -11,22 +46,8 @@ WORKDIR $APP_PATH
 
 COPY Gemfile $APP_PATH/Gemfile
 COPY Gemfile.lock $APP_PATH/Gemfile.lock
-  # =========ローカルと本番切り替え===========
+
 RUN gem install bundler
-  # ======================================
 RUN bundle install
 
-  # =========ローカルと本番切り替え===========
 RUN mkdir -p tmp/sockets
-  # ======================================
-
-COPY . $APP_PATH
-
-# Add a script to be executed every time the container starts.
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
-EXPOSE 3000
-
-# Start the main process.
-CMD ["rails", "server", "-b", "0.0.0.0"]
