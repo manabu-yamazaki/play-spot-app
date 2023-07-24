@@ -29,9 +29,9 @@ services:
       # - ./backend:/myapp
       # - ./backend/vendor/bundle:/myapp/vendor/bundle
       - .:/myapp
-      - public-data:/backend/myapp/public
-      - tmp-data:/backend/myapp/tmp
-      - log-data:/backend/myapp/log
+      - public-data:/play_spot_app/public
+      - tmp-data:/play_spot_app/tmp
+      - log-data:/play_spot_app/log
     environment:
       TZ: Asia/Tokyo
       RAILS_ENV: development
@@ -50,8 +50,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       # - ./frontend:/usr/src/app
-      - public-data:/frontend/myapp/public
-      - tmp-data:/frontend/myapp/tmp
+      - public-data:/play_spot_app/public
+      - tmp-data:/play_spot_app/tmp
     command: sh -c "cd app && yarn && yarn start"
     ports:
       - "4000:3000"
