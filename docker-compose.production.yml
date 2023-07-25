@@ -26,8 +26,8 @@ services:
     # ======================================
     image: rails:dev
     volumes:
-      # - ./backend:/myapp
-      # - ./backend/vendor/bundle:/myapp/vendor/bundle
+      - ./backend:/play-spot-app
+      - ./backend/vendor/bundle:/play-spot-app/vendor/bundle
       - .:/play-spot-app
       - public-data:/play-spot-app/backend/public
       - tmp-data:/play-spot-app/backend/tmp
