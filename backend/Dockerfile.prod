@@ -19,7 +19,7 @@ RUN bundle install
 COPY . $APP_PATH
 
   # =========ローカルと本番切り替え===========
-RUN mkdir -p backend/tmp/sockets
+RUN mkdir -p tmp/sockets
   # ======================================
 
 # # Add a script to be executed every time the container starts.
