@@ -28,7 +28,7 @@ services:
     volumes:
       - ./backend:/play-spot-app
       - ./backend/vendor/bundle:/play-spot-app/vendor/bundle
-      - .:/play-spot-app
+      # - .:/play-spot-app
       - public-data:/play-spot-app/backend/public
       - tmp-data:/play-spot-app/backend/tmp
       - log-data:/play-spot-app/backend/log
