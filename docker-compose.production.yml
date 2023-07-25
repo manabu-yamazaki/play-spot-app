@@ -52,7 +52,7 @@ services:
       # - ./frontend:/usr/src/app
       - public-data:/play-spot-app/backend/public
       - tmp-data:/play-spot-app/backend/tmp
-    # command: sh -c "cd app && yarn && yarn start"
+    command: sh -c "yarn && yarn start"
     ports:
       - "4000:3000"
     networks:

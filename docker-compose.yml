@@ -1,37 +1,28 @@
 version: "3"
 
 services:
-  # =========ローカルと本番切り替え===========
-  # db:
-  #   image: mysql:8.0
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: password
-  #   command: --default-authentication-plugin=mysql_native_password
-  #   volumes:
-  #     - mysql-data:/var/lib/mysql
-  #     - /tmp/dockerdir:/etc/mysql/conf.d/
-  #   ports:
-  #     - 3306:3306
-  #   networks:
-  #     - activityspot-network
-  # ======================================
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - /tmp/dockerdir:/etc/mysql/conf.d/
+    ports:
+      - 3306:3306
+    networks:
+      - activityspot-network
 
   api:
     build:
       context: ./backend/
       dockerfile: Dockerfile
-    # =========ローカルと本番切り替え===========
-    # command: bundle exec rails s -p 3000 -b '0.0.0.0'
-    command: bundle exec puma -C config/puma.rb -e production
-    # ======================================
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
     image: rails:dev
     volumes:
-      # - ./backend:/myapp
-      # - ./backend/vendor/bundle:/myapp/vendor/bundle
-      - .:/play-spot-app
-      - public-data:/play-spot-app/backend/public
-      - tmp-data:/play-spot-app/backend/tmp
-      - log-data:/play-spot-app/backend/log
+      - ./backend:/myapp
+      - ./backend/vendor/bundle:/myapp/vendor/bundle
     environment:
       TZ: Asia/Tokyo
       RAILS_ENV: development
@@ -39,19 +30,15 @@ services:
       - 3001:3000
     networks:
       - activityspot-network
-    # =========ローカルと本番切り替え===========
-    # depends_on:
-    #   - db
-  # ======================================
+    depends_on:
+      - db
 
   front:
     build:
       context: ./frontend/
       dockerfile: Dockerfile
     volumes:
-      # - ./frontend:/usr/src/app
-      - public-data:/play-spot-app/backend/public
-      - tmp-data:/play-spot-app/backend/tmp
+      - ./frontend:/usr/src/app
     command: sh -c "cd app && yarn && yarn start"
     ports:
       - "4000:3000"
