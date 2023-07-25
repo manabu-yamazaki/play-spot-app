@@ -22,3 +22,5 @@ ssh activityspot
 
 RUBY_BUILD_SKIP_MIRROR=1 rbenv install -V 3.0.6
 TMPDIR="${PWD}/tmp" RUBY_BUILD_SKIP_MIRROR=1 rbenv install -v 3.0.6
+
+docker-compose -f docker-compose.production.yml up --build
