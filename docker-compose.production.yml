@@ -19,7 +19,7 @@ services:
   api:
     build:
       context: ./backend/
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     # =========ローカルと本番切り替え===========
     # command: bundle exec rails s -p 3000 -b '0.0.0.0'
     command: bundle exec puma -C config/puma.rb -e production
@@ -47,7 +47,7 @@ services:
   front:
     build:
       context: ./frontend/
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     volumes:
       - ./frontend:/usr/src/app
       - public-data:/play-spot-app/backend/public
