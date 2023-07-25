@@ -1,6 +1,7 @@
   # =========ローカルと本番切り替え===========
 FROM node:18.16.1-alpine
-WORKDIR /play-spot-app/frontend
+# WORKDIR /usr/src/app
+WORKDIR /play-spot-app/frontend/app
 # FROM nginx:1.15.8
 
 # RUN rm -f /etc/nginx/conf.d/*
