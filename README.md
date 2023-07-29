@@ -23,4 +23,42 @@ ssh activityspot
 RUBY_BUILD_SKIP_MIRROR=1 rbenv install -V 3.0.6
 TMPDIR="${PWD}/tmp" RUBY_BUILD_SKIP_MIRROR=1 rbenv install -v 3.0.6
 
-docker-compose -f docker-compose.production.yml up --build
+# 開発環境
+
+## イメージのビルド
+
+docker-compose build
+
+## コンテナ立ち上げ
+
+docker-compose up
+docker-compose up --build
+
+## 本番環境イメージのビルド
+
+docker-compose -f docker-compose.production.yml build
+
+## 本番環境イメージを AWS ECR にプッシュ
+
+docker push 788422463177.dkr.ecr.ap-northeast-1.amazonaws.com/play-spot-repository_api:latest
+docker push 788422463177.dkr.ecr.ap-northeast-1.amazonaws.com/play-spot-repository_web:latest
+
+# 本番環境
+
+## 本番環境イメージを AWS ECR からプル
+
+docker pull 788422463177.dkr.ecr.ap-northeast-1.amazonaws.com/play-spot-repository_api:latest
+docker pull 788422463177.dkr.ecr.ap-northeast-1.amazonaws.com/play-spot-repository_web:latest
+docker-compose pull
+
+## コンテナ立ち上げ
+
+docker run -d --name api -p 3001:3000 788422463177.dkr.ecr.ap-northeast-1.amazonaws.com/play-spot-repository_api
+docker run -d --name web -p 4000:3000 788422463177.dkr.ecr.ap-northeast-1.amazonaws.com/play-spot-repository_web
+docker-compose -f docker-compose.production.yml up
+
+docker system df
+docker ps -a
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -q)
+docker inspect コンテナ ID | grep -A9 Mounts

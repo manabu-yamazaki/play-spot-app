@@ -9,7 +9,8 @@
 /coverage
 
 # production
-/build
+/app/build
+/app/node_modules
 
 # misc
 .DS_Store

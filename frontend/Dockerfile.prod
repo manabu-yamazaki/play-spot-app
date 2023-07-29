@@ -1,7 +1,7 @@
   # =========ローカルと本番切り替え===========
-FROM node:18.16.1-alpine
-ENV LANG C.UTF-8
-WORKDIR /usr/src/app
+# FROM node:18.16.1-alpine
+# ENV LANG C.UTF-8
+# WORKDIR /app
 # WORKDIR /play-spot-app/frontend
 # FROM nginx:1.15.8
 
@@ -12,3 +12,15 @@ WORKDIR /usr/src/app
 # # ビルド完了後にNginxを起動
 # CMD /usr/sbin/nginx -g 'daemon off;' -c /etc/nginx/nginx.conf
   # ======================================
+FROM node:18.16.1-alpine
+ENV LANG C.UTF-8
+ENV APP_PATH /play-spot-app
+RUN mkdir $APP_PATH
+WORKDIR $APP_PATH
+COPY app/package.json $APP_PATH
+RUN yarn
+COPY app $APP_PATH
+RUN yarn build
+
+# FROM nginx
+# COPY --from=0 /app/build /usr/share/nginx/html
