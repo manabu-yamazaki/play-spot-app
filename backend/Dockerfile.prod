@@ -4,22 +4,22 @@ FROM ruby:3.0
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs default-mysql-client
   # ======================================
 
-ENV APP_PATH /play-spot-app
+ENV APP_PATH /myapp
 
-RUN mkdir $APP_PATH
+# RUN mkdir /play-spot-app
 WORKDIR $APP_PATH
 
 COPY Gemfile $APP_PATH/Gemfile
 COPY Gemfile.lock $APP_PATH/Gemfile.lock
   # =========ローカルと本番切り替え===========
-RUN gem install bundler
+# RUN gem install bundler
   # ======================================
 RUN bundle install
 
 COPY . $APP_PATH
 
   # =========ローカルと本番切り替え===========
-RUN mkdir -p tmp/sockets
+# RUN mkdir -p tmp/sockets
   # ======================================
 
 # # Add a script to be executed every time the container starts.
