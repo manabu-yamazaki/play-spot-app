@@ -45,11 +45,20 @@ docker push 788422463177.dkr.ecr.ap-northeast-1.amazonaws.com/play-spot-reposito
 
 # 本番環境
 
+## credentials.yml 編集
+
+※直接.enc 編集は禁止
+Docker コンテナに入って以下コマンドを実行
+EDITOR='vim' rails credentials:edit
+
+sudo scp -i ~/.ssh/activity_spot.pem config/master.key ec2-user@35.76.55.169:/home/ec2-user
+sudo mv master.key /play-spot-app/backend/config
+
 ## 本番環境イメージを AWS ECR からプル
 
 docker pull 788422463177.dkr.ecr.ap-northeast-1.amazonaws.com/play-spot-repository_api:latest
 docker pull 788422463177.dkr.ecr.ap-northeast-1.amazonaws.com/play-spot-repository_web:latest
-docker-compose pull
+docker-compose -f docker-compose.production.yml pull
 
 ## コンテナ立ち上げ
 
