@@ -14,9 +14,10 @@ const client = applyCaseMiddleware(
   axios.create({
     baseURL: `${
       process.env.NODE_ENV === "development"
-        ? "http://localhost:3001"
+        ? "http://localhost"
         : "http://35.76.55.169"
-    }/api/v1`,
+    }:3001/api/v1`,
+    headers: { "Access-Control-Allow-Origin": "*" },
   }),
   options,
 )
