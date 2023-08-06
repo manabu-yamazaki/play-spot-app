@@ -43,8 +43,8 @@ services:
       TZ: Asia/Tokyo
       RAILS_ENV: production
       RAILS_SERVE_STATIC_FILES: "true"
-    # ports:
-    #   - 3001:3000
+    ports:
+      - 3001:3000
     networks:
       - activityspot-network
     # =========ローカルと本番切り替え===========
