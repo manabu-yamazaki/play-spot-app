@@ -76,6 +76,7 @@ mysql -u root -h {RDS のエンドポイント} -p
 mysql -u root -h activityspot-db-instance.cg6lcqourgdq.ap-northeast-1.rds.amazonaws.com -p
 
 docker system df
+df -h
 docker ps -a
 docker rm $(docker ps -a -q)
 docker rmi $(docker images -q)
