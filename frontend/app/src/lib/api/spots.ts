@@ -1,5 +1,5 @@
 import { SpotParams } from "interfaces"
-import client from "lib/api/client"
+import { client, clientUpload } from "lib/api/client"
 
 // 全スポットを取得
 export const getSpots = () => {
@@ -13,10 +13,12 @@ export const getSpot = (id: string) => {
 
 // 指定のスポットを取得
 export const patchSpot = (params: SpotParams) => {
-  return client.patch(`spots/${params.id}`, params)
+  return clientUpload.patch(`spots/${params.id}`, { spot: params })
+  // return clientUpload.patch(`spots/${params.get("id")}`, params)
+  // return clientUpload.patchForm(`spots/${params.get("id")}`, params)
 }
 
 // 指定のスポットを取得
 export const postSpot = (params: SpotParams) => {
-  return client.post("spots", params)
+  return clientUpload.post("spots", params)
 }

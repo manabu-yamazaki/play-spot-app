@@ -1,5 +1,5 @@
 import Cookies from "js-cookie"
-import client from "lib/api/client"
+import { client } from "lib/api/client"
 
 import { SignInParams, SignUpParams } from "interfaces/index"
 

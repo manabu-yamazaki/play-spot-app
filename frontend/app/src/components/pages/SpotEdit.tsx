@@ -13,6 +13,8 @@ const SpotEdit: React.FC = () => {
   const [prefectureCode, setPrefectureCode] = useState<string>("0")
   const [minBudget, setMinBudget] = useState<string>("0")
   const [maxBudget, setMaxBudget] = useState<string>("0")
+  const [imageUrl, setImageUrl] = useState<string>("")
+  const [image, setImage] = useState<File>()
   const [activeStep, setActiveStep] = useState<number>(0)
   const { id } = useParams()
   const { setErrorMessage } = useContext(AuthContext)
@@ -38,6 +40,7 @@ const SpotEdit: React.FC = () => {
           setPrefectureCode(res.data.spot.prefectureCode)
           setMinBudget(res.data.spot.minBudget)
           setMaxBudget(res.data.spot.maxBudget)
+          setImageUrl(res.data.spot.image_url)
         })
         .catch((err) => {
           console.log(err)
@@ -61,7 +64,18 @@ const SpotEdit: React.FC = () => {
       prefecture_code: prefectureCode,
       min_budget: minBudget,
       max_budget: maxBudget,
+      image: image,
     }
+    // let formData = new FormData()
+    // if (id) formData.append("id", id)
+    // formData.append("name", name)
+    // formData.append("url", url)
+    // formData.append("summary", summary)
+    // formData.append("prefecture_code", prefectureCode)
+    // formData.append("min_budget", minBudget)
+    // formData.append("max_budget", maxBudget)
+    // if (image) formData.append("image", image)
+    // if (id) formData.append("_method", "PATCH")
     const handleApi = id ? patchSpot : postSpot
     await handleApi(params)
       .then((res) => {
@@ -101,6 +115,14 @@ const SpotEdit: React.FC = () => {
   const onChangeMaxBudget = (e: React.ChangeEvent<HTMLInputElement>): void =>
     setMaxBudget(e.target.value)
 
+  const onChangeImage = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    e.preventDefault()
+
+    if (!e.target.files) return
+    setImage(e.target.files[0])
+    setImageUrl(window.URL.createObjectURL(e.target.files[0]))
+  }
+
   return (
     <SpotsEditTemplate
       title="Spot Edit"
@@ -111,6 +133,7 @@ const SpotEdit: React.FC = () => {
       prefectureCode={prefectureCode}
       minBudget={minBudget}
       maxBudget={maxBudget}
+      imageUrl={imageUrl}
       handleNext={handleNext}
       handleBack={handleBack}
       onChangeName={onChangeName}
@@ -119,6 +142,7 @@ const SpotEdit: React.FC = () => {
       onChangePrefectureCode={onChangePrefectureCode}
       onChangeMinBudget={onChangeMinBudget}
       onChangeMaxBudget={onChangeMaxBudget}
+      onChangeImage={onChangeImage}
     ></SpotsEditTemplate>
   )
 }

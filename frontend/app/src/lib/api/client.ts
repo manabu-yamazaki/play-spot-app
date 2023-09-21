@@ -10,7 +10,7 @@ const options = {
   ignoreHeaders: true,
 }
 
-const client = applyCaseMiddleware(
+export const client = applyCaseMiddleware(
   axios.create({
     baseURL: `${
       process.env.NODE_ENV === "development"
@@ -22,4 +22,17 @@ const client = applyCaseMiddleware(
   options,
 )
 
-export default client
+export const clientUpload = applyCaseMiddleware(
+  axios.create({
+    baseURL: `${
+      process.env.NODE_ENV === "development"
+        ? "http://localhost"
+        : "http://35.76.55.169"
+    }:3001/api/v1`,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "multipart/form-data",
+    },
+  }),
+  options,
+)

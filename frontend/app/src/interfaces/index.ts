@@ -34,6 +34,7 @@ export interface SpotParams {
   prefecture_code: string
   min_budget: string
   max_budget: string
+  image: File | undefined
   created_at?: Date
   updated_at?: Date
 }

@@ -3,6 +3,7 @@ import { StepButtons } from "components/molecules/StepButtons"
 import { StepperLabel } from "components/molecules/StepperLabel"
 import { SpotConfirm } from "components/organisms/SpotConfirm"
 import { SpotInput } from "components/organisms/SpotInput"
+import { SpotUpload } from "components/organisms/SpotUpload"
 import { steps } from "constants/index"
 import React from "react"
 
@@ -28,14 +29,13 @@ function getStepContent(props: SpotsEditTemplateProps) {
       )
     case 1:
       return (
-        <SpotConfirm
+        <SpotUpload
           activeStep={props.activeStep}
           name={props.name}
           url={props.url}
-          summary={props.summary}
-          prefectureCode={props.prefectureCode}
-          minBudget={props.minBudget}
-          maxBudget={props.maxBudget}
+          imageUrl={props.imageUrl}
+          onChangeName={props.onChangeName}
+          onChangeImage={props.onChangeImage}
         />
       )
     case 2:
@@ -64,6 +64,7 @@ type SpotsEditTemplateProps = {
   prefectureCode: string
   minBudget: string
   maxBudget: string
+  imageUrl: string
   onChangeName: (e: React.ChangeEvent<HTMLInputElement>) => void
   onChangeUrl: (e: React.ChangeEvent<HTMLInputElement>) => void
   onChangeSummary: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -72,6 +73,7 @@ type SpotsEditTemplateProps = {
   onChangeMaxBudget: (e: React.ChangeEvent<HTMLInputElement>) => void
   handleNext: () => void
   handleBack: () => void
+  onChangeImage: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export const SpotsEditTemplate: React.FC<SpotsEditTemplateProps> = (props) => {
