@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :spots, only: %i[index show create update]
+      resources :spot_favorites, only: %i[create destroy]
       resources :test, only: %i[index]
 
       mount_devise_token_auth_for 'User', at: 'auth', controllers: {
