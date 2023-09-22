@@ -6,6 +6,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
-  has_many :spot_favorites
-  has_many :spots, through: :spot_favorites
+  has_many :likes
+  has_many :spots, through: :likes
 end

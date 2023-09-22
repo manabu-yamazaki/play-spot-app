@@ -39,13 +39,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_21_121255) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "spot_favorites", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "likes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "spot_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["spot_id"], name: "index_spot_favorites_on_spot_id"
-    t.index ["user_id"], name: "index_spot_favorites_on_user_id"
+    t.index ["spot_id"], name: "index_likes_on_spot_id"
+    t.index ["user_id", "spot_id"], name: "index_likes_on_user_id_and_spot_id", unique: true
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "spots", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
